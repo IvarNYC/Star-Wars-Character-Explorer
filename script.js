@@ -1,26 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const charactersList = document.getElementById('characters-list');
-  
-    fetch('https://swapi.dev/api/people/')
-      .then(response => response.json())
-      .then(data => {
-        data.results.forEach(character => {
-          const li = document.createElement('li');
-  
-          li.innerHTML = `
-            <h2>${character.name}</h2>
-            <p>Height: ${character.height} cm</p>
-            <p>Mass: ${character.mass} kg</p>
-            <p>Hair Color: ${character.hair_color}</p>
-            <p>Skin Color: ${character.skin_color}</p>
-            <p>Eye Color: ${character.eye_color}</p>
-            <p>Birth Year: ${character.birth_year}</p>
-            <p>Gender: ${character.gender}</p>
-          `;
-  
-          charactersList.appendChild(li);
-        });
-      })
-      .catch(error => console.error('Error fetching SWAPI data:', error));
+const charactersList = document.getElementById('characters-list');
+const apiUrl = 'https://swapi.dev/api/people/';
+
+fetch(apiUrl)
+  .then((response) => response.json())
+  .then((data) => {
+    data.results.forEach((character) => {
+      const characterCard = document.createElement('li');
+      characterCard.className = 'characters-card w-64 p-4 m-2';
+
+      const characterName = document.createElement('h2');
+      characterName.className = 'character-name';
+      characterName.textContent = character.name;
+
+      const characterInfo = document.createElement('ul');
+      characterInfo.className = 'character-info';
+
+      const characterDetails = [
+        { label: 'Height', value: character.height },
+        { label: 'Mass', value: character.mass },
+        { label: 'Hair Color', value: character.hair_color },
+        { label: 'Skin Color', value: character.skin_color },
+        { label: 'Eye Color', value: character.eye_color },
+        { label: 'Birth Year', value: character.birth_year },
+        { label: 'Gender', value: character.gender },
+      ];
+
+      characterDetails.forEach((detail) => {
+        const detailItem = document.createElement('li');
+        detailItem.textContent = `${detail.label}: ${detail.value}`;
+        characterInfo.appendChild(detailItem);
+      });
+
+      characterCard.appendChild(characterName);
+      characterCard.appendChild(characterInfo);
+      charactersList.appendChild(characterCard);
+    });
+  })
+  .catch((error) => {
+    console.error('Error fetching character data:', error);
   });
-  
