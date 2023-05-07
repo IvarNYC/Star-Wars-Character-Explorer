@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  #characters-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #characters-list li {
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 250px;
+  }
+  
+  #characters-list li h2 {
+    margin-top: 0;
+  }
+  
